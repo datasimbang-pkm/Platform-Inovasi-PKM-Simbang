@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Inovasi SATU - Puskesmas Simbang</title>
+    
+    <!-- Memuat Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Memuat ikon FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-bg': '#E8F2FA',
+                        'brand-dark': '#0A162E',
+                        'brand-blue': '#1D63ED',
+                        'brand-blue-light': '#3B82F6',
+                        'brand-text': '#475569',
+                        'brand-orange': '#F97316'
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.05)',
+                        'float': '0 20px 40px -10px rgba(29, 99, 237, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Hapus background default body agar latar belakang khusus bisa terlihat */
+        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; background-color: transparent; }
+        
+        /* Efek Kaca (Glassmorphism) Utama untuk Kartu */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+        }
+
+        /* Efek Kaca untuk Section Besar */
+        .glass-section {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.6);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Dark Glass untuk ornamen gambar */
+        .dark-glass-card {
+            background: rgba(10, 22, 46, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .bg-pattern {
+            background-image: radial-gradient(#1D63ED 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.05;
+        }
+
+        /* Animasi mengambang halus */
+        @keyframes floatY {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+            animation: floatY 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="text-brand-dark antialiased relative">
+
+    <!-- Latar Belakang Tetap dengan Elemen Abstrak (Blobs) untuk menonjolkan efek Glass -->
+    <div class="fixed inset-0 z-[-1] bg-brand-bg overflow-hidden">
+        <div class="absolute inset-0 bg-pattern z-0 mix-blend-overlay"></div>
+        <div class="absolute top-[-10%] left-[-10%] w-[30rem] h-[30rem] sm:w-[40rem] sm:h-[40rem] bg-brand-blue-light/30 rounded-full blur-[100px] sm:blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[25rem] h-[25rem] sm:w-[40rem] sm:h-[40rem] bg-brand-orange/20 rounded-full blur-[100px] sm:blur-[120px]"></div>
+        <div class="absolute top-[40%] left-[20%] w-[20rem] h-[20rem] sm:w-[30rem] sm:h-[30rem] bg-purple-400/20 rounded-full blur-[80px] sm:blur-[100px]"></div>
+    </div>
+
+    <!-- NAVBAR KACA -->
+    <nav class="absolute top-0 w-full z-50 px-4 py-6 sm:px-8 lg:px-12 flex justify-between items-center bg-white/30 backdrop-blur-xl border-b border-white/40 shadow-sm">
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+            <img src="Logo Puskesmas.png" alt="Logo Puskesmas Simbang" class="h-10 w-10 sm:h-12 sm:w-12 object-contain bg-white/60 backdrop-blur-sm rounded-full p-1 shadow-sm border border-white/50" onerror="this.src='https://placehold.co/100x100/1D63ED/ffffff?text=PS'">
+        </div>
+        
+        <!-- Links -->
+        <div class="hidden md:flex gap-8 text-sm font-bold text-brand-dark/80">
+            <a href="index.html" class="hover:text-brand-blue transition drop-shadow-sm"><i class="fa-solid fa-arrow-left mr-1"></i> Kembali ke Beranda</a>
+        </div>
+        
+        <!-- Tombol Login Pegawai Dihapus Sesuai Permintaan -->
+    </nav>
+
+    <!-- HEADER / HERO SECTION -->
+    <!-- PERUBAHAN: Mengurangi padding-top (pt) agar jarak dengan navbar tidak terlalu jauh -->
+    <header class="relative pt-24 pb-20 lg:pt-32 lg:pb-32 overflow-hidden">
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-8">
+            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
+                
+                <!-- Teks -->
+                <div class="w-full lg:w-1/2">
+                    <span class="border border-brand-blue/30 bg-brand-blue/10 backdrop-blur-sm text-brand-blue text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider mb-6 inline-block shadow-sm">Sistem Informasi Inovatif</span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-brand-dark leading-tight tracking-tight mb-6 drop-shadow-sm">
+                        Satu Dashboard untuk <br>
+                        <span class="text-brand-blue">Semua Agenda</span>
+                    </h1>
+                    <p class="text-brand-dark/80 leading-relaxed font-bold mb-8 max-w-lg drop-shadow-sm">
+                        <strong>SATU (SMART Agenda Terpadu)</strong> dirancang khusus untuk mengakhiri tumpang tindih jadwal kegiatan di Puskesmas Simbang. Sistem tersinkronisasi secara otomatis yang menghemat waktu manajemen hingga 80%.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <!-- Glass Card Info 1 -->
+                        <div class="glass-card rounded-2xl p-4 flex items-center gap-4 flex-1 min-w-[200px] hover:-translate-y-1 transition-transform">
+                            <div class="w-12 h-12 rounded-full bg-brand-blue/10 backdrop-blur-sm border border-brand-blue/20 text-brand-blue flex items-center justify-center text-xl shadow-inner">
+                                <i class="fa-solid fa-rotate"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-black uppercase text-brand-dark/60 tracking-wider">Pembaruan</p>
+                                <p class="font-black text-lg text-brand-dark drop-shadow-sm">Real-Time</p>
+                            </div>
+                        </div>
+                        <!-- Glass Card Info 2 -->
+                        <div class="glass-card rounded-2xl p-4 flex items-center gap-4 flex-1 min-w-[200px] hover:-translate-y-1 transition-transform">
+                            <div class="w-12 h-12 rounded-full bg-brand-orange/10 backdrop-blur-sm border border-brand-orange/20 text-brand-orange flex items-center justify-center text-xl shadow-inner">
+                                <i class="fa-solid fa-leaf"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-black uppercase text-brand-dark/60 tracking-wider">Lingkungan</p>
+                                <p class="font-black text-lg text-brand-dark drop-shadow-sm">100% Paperless</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gambar/Mockup -->
+                <div class="w-full lg:w-1/2 relative flex justify-center animate-float">
+                    <!-- PERUBAHAN: Menghapus kelas 'dark-glass-card', padding, border, dan background agar hanya menampilkan logonya saja -->
+                    <div class="relative w-full max-w-md flex items-center justify-center mt-12 sm:mt-0">
+                        <img src="Logo SMART.png" alt="Logo SMART" class="w-full h-auto max-h-[350px] sm:max-h-[400px] object-contain drop-shadow-[0_20px_40px_rgba(29,99,237,0.3)]" onerror="this.src='https://placehold.co/800x800/transparent/1D63ED?text=Logo+SMART'">
+                        
+                        <!-- Floating badge -->
+                        <div class="absolute -top-6 sm:-top-8 -right-2 sm:-right-8 glass-card bg-white/90 rounded-2xl p-3 sm:p-4 shadow-xl flex items-center gap-3 border border-white/80 z-20">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-green-500/10 backdrop-blur-sm border border-green-500/20 text-green-600 flex items-center justify-center text-lg sm:text-xl shadow-inner">
+                                <i class="fa-solid fa-shield-check"></i>
+                            </div>
+                            <div>
+                                <p class="text-[9px] sm:text-[10px] font-black text-brand-dark/60 uppercase tracking-wider">Status Sistem</p>
+                                <p class="text-xs sm:text-sm font-black text-brand-dark drop-shadow-sm">Aktif & Aman</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION FITUR UTAMA -->
+    <section class="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 relative z-20 -mt-10 sm:-mt-16">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-black text-brand-dark tracking-tight mb-4 drop-shadow-sm">Fitur Utama Platform SATU</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Fitur 1 (Glass Card) -->
+                <div class="glass-card rounded-3xl p-8 hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-blue/10 backdrop-blur-sm border border-brand-blue/20 text-brand-blue flex items-center justify-center text-2xl mb-6 shadow-inner group-hover:bg-brand-blue group-hover:text-white transition-colors duration-300">
+                        <i class="fa-regular fa-calendar-check"></i>
+                    </div>
+                    <h3 class="text-xl font-black mb-3 text-brand-dark group-hover:text-brand-blue transition-colors">SINKRON</h3>
+                    <p class="text-sm text-brand-dark/80 font-bold leading-relaxed">Mengintegrasikan seluruh jadwal kegiatan layanan ke dalam satu kalender digital yang transparan untuk mencegah tumpang tindih kegiatan di luar gedung.</p>
+                </div>
+                <!-- Fitur 2 (Glass Card) -->
+                <div class="glass-card rounded-3xl p-8 hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-orange/10 backdrop-blur-sm border border-brand-orange/20 text-brand-orange flex items-center justify-center text-2xl mb-6 shadow-inner group-hover:bg-brand-orange group-hover:text-white transition-colors duration-300">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <h3 class="text-xl font-black mb-3 text-brand-dark group-hover:text-brand-orange transition-colors">KENDALI</h3>
+                    <p class="text-sm text-brand-dark/80 font-bold leading-relaxed">Memfasilitasi pelaporan hasil kegiatan dan kendala lapangan secara real-time untuk mempercepat evaluasi pimpinan dan advokasi lintas sektor.</p>
+                </div>
+                <!-- Fitur 3 (Glass Card) -->
+                <div class="glass-card rounded-3xl p-8 hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-green-500/10 backdrop-blur-sm border border-green-500/20 text-green-600 flex items-center justify-center text-2xl mb-6 shadow-inner group-hover:bg-green-500 group-hover:text-white transition-colors duration-300">
+                        <i class="fa-solid fa-file-export"></i>
+                    </div>
+                    <h3 class="text-xl font-black mb-3 text-brand-dark group-hover:text-green-600 transition-colors">VALID</h3>
+                    <p class="text-sm text-brand-dark/80 font-bold leading-relaxed">Mengunci akuntabilitas keuangan dengan mewajibkan verifikasi silang penyelesaian laporan digital SINKRON dan KENDALI sebagai syarat mutlak pencairan dana SPJ.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION KALENDER -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 relative z-20">
+        <div class="glass-card rounded-[2.5rem] p-6 sm:p-10 border border-white/60">
+            
+            <!-- Judul Kalender -->
+            <div class="text-center mb-10">
+                <span class="border border-brand-blue/30 bg-brand-blue/10 backdrop-blur-sm text-brand-blue text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider mb-4 inline-block shadow-sm">Real-Time Update</span>
+                <h2 class="text-3xl md:text-4xl font-black text-brand-dark mb-4 drop-shadow-sm">SMART Agenda Terpadu (SATU)</h2>
+                <p class="text-brand-dark/80 font-bold max-w-2xl mx-auto drop-shadow-sm">
+                    Pantau seluruh jadwal kegiatan program dalam dan luar gedung Puskesmas Simbang langsung dari portal ini.
+                </p>
+            </div>
+            
+            <!-- Embed Iframe Kalender (Dengan bingkai kaca transparan) -->
+            <div class="relative w-full rounded-3xl overflow-hidden border-2 border-white/40 bg-white/40 backdrop-blur-md h-[600px] sm:h-[700px] shadow-glass p-2">
+                <!-- Wrapper dalam untuk rounding iframe -->
+                <div class="w-full h-full rounded-2xl overflow-hidden bg-white/80">
+                    <iframe 
+                        src="https://calendar.google.com/calendar/embed?src=b5ad23809cb6069cfb4c8014ebd35c073d0a629a4ad0561a053eb262481179e2%40group.calendar.google.com&ctz=Asia%2FMakassar" 
+                        style="border: 0" 
+                        width="100%" 
+                        height="100%" 
+                        frameborder="0" 
+                        scrolling="no" 
+                        title="Kalender Kegiatan Puskesmas Simbang"
+                        class="w-full h-full">
+                    </iframe>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- FOOTER KACA -->
+    <footer class="glass-section !border-b-0 pt-8 pb-8 text-center relative z-20">
+        <p class="text-xs font-bold text-brand-dark/70 drop-shadow-sm">
+            &copy; 2026 Puskesmas Simbang. Inovasi SATU (SMART Agenda Terpadu).
+        </p>
+    </footer>
+
+</body>
+</html>
