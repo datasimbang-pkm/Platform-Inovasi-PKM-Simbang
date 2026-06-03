@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VALID - Verifikasi Anggaran Lintas Integrasi Data | SATU</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-bg': '#E8F2FA',
+                        'brand-dark': '#0A162E',
+                        'brand-blue': '#1D63ED',
+                        'brand-blue-light': '#3B82F6',
+                        'brand-text': '#475569',
+                        'brand-orange': '#F97316'
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.05)',
+                        'float': '0 20px 40px -10px rgba(29, 99, 237, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; background-color: transparent; }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+        }
+
+        .glass-section {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.6);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+        }
+
+        .bg-pattern {
+            background-image: radial-gradient(#22c55e 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.05;
+        }
+
+        @keyframes floatY {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+            animation: floatY 6s ease-in-out infinite;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-up {
+            animation: fadeUp 0.6s ease-out both;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        .step-connector::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -2rem;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 2rem;
+            background: linear-gradient(to bottom, rgba(34,197,94,0.5), rgba(34,197,94,0.1));
+        }
+    </style>
+</head>
+<body class="text-brand-dark antialiased relative">
+
+    <!-- Background Blobs -->
+    <div class="fixed inset-0 z-[-1] bg-brand-bg overflow-hidden">
+        <div class="absolute inset-0 bg-pattern z-0 mix-blend-overlay"></div>
+        <div class="absolute top-[-10%] left-[-10%] w-[30rem] h-[30rem] sm:w-[40rem] sm:h-[40rem] bg-green-400/25 rounded-full blur-[100px] sm:blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[25rem] h-[25rem] sm:w-[40rem] sm:h-[40rem] bg-emerald-600/20 rounded-full blur-[100px] sm:blur-[120px]"></div>
+        <div class="absolute top-[40%] left-[20%] w-[20rem] h-[20rem] sm:w-[30rem] sm:h-[30rem] bg-brand-blue/15 rounded-full blur-[80px] sm:blur-[100px]"></div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="absolute top-0 w-full z-50 px-4 py-6 sm:px-8 lg:px-12 flex justify-between items-center bg-white/30 backdrop-blur-xl border-b border-white/40 shadow-sm">
+        <div class="flex items-center gap-3">
+            <img src="Logo Puskesmas.png" alt="Logo Puskesmas Simbang" class="h-10 w-10 sm:h-12 sm:w-12 object-contain bg-white/60 backdrop-blur-sm rounded-full p-1 shadow-sm border border-white/50" onerror="this.src='https://placehold.co/100x100/22c55e/ffffff?text=PS'">
+        </div>
+        <div class="hidden md:flex gap-8 text-sm font-bold text-brand-dark/80">
+            <a href="satu-detail.html" class="hover:text-green-600 transition drop-shadow-sm"><i class="fa-solid fa-arrow-left mr-1"></i> Kembali ke SATU</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="relative pt-24 pb-16 lg:pt-36 lg:pb-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-8">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                
+                <!-- Teks -->
+                <div class="w-full lg:w-1/2 fade-up">
+                    <span class="border border-green-500/30 bg-green-500/10 backdrop-blur-sm text-green-700 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider mb-6 inline-block shadow-sm">Modul Akuntabilitas Keuangan</span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-brand-dark leading-tight tracking-tight mb-6 drop-shadow-sm">
+                        Verifikasi Laporan<br>
+                        <span class="text-green-600">Tanpa Celah</span>
+                    </h1>
+                    <p class="text-brand-dark/80 leading-relaxed font-bold mb-8 max-w-lg drop-shadow-sm">
+                        <strong>VALID</strong> (Verifikasi Anggaran Lintas Integrasi Data) mengunci pencairan dana SPJ hanya setelah laporan digital SINKRON dan KENDALI terverifikasi lengkap — menjamin akuntabilitas penuh tanpa pengecualian.
+                    </p>
+                    <!-- Stat Cards -->
+                    <div class="flex flex-wrap gap-4">
+                        <div class="glass-card rounded-2xl p-4 flex items-center gap-4 flex-1 min-w-[180px] hover:-translate-y-1 transition-transform fade-up delay-1">
+                            <div class="w-12 h-12 rounded-full bg-green-500/10 backdrop-blur-sm border border-green-500/20 text-green-600 flex items-center justify-center text-xl shadow-inner">
+                                <i class="fa-solid fa-lock"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-black uppercase text-brand-dark/60 tracking-wider">Proteksi</p>
+                                <p class="font-black text-lg text-brand-dark drop-shadow-sm">2-Lapis</p>
+                            </div>
+                        </div>
+                        <div class="glass-card rounded-2xl p-4 flex items-center gap-4 flex-1 min-w-[180px] hover:-translate-y-1 transition-transform fade-up delay-2">
+                            <div class="w-12 h-12 rounded-full bg-brand-blue/10 backdrop-blur-sm border border-brand-blue/20 text-brand-blue flex items-center justify-center text-xl shadow-inner">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-black uppercase text-brand-dark/60 tracking-wider">Akurasi</p>
+                                <p class="font-black text-lg text-brand-dark drop-shadow-sm">100% Teraudit</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ilustrasi -->
+                <div class="w-full lg:w-1/2 flex justify-center animate-float fade-up delay-3">
+                    <div class="relative w-full max-w-md">
+                        <!-- Badge utama -->
+                        <div class="glass-card rounded-[2rem] p-8 flex flex-col items-center gap-4 border border-white/70 shadow-float">
+                            <div class="w-24 h-24 rounded-[1.5rem] bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-5xl text-white shadow-[0_10px_30px_rgba(34,197,94,0.4)]">
+                                <i class="fa-solid fa-file-shield"></i>
+                            </div>
+                            <h2 class="text-3xl font-black text-brand-dark tracking-tight">VALID</h2>
+                            <p class="text-xs font-black text-brand-dark/60 uppercase tracking-widest text-center">Verifikasi Akuntabilitas<br>Laporan Inovasi Digital</p>
+                            <div class="w-full h-px bg-gradient-to-r from-transparent via-green-300/60 to-transparent"></div>
+                            <div class="flex gap-6 text-center">
+                                <div>
+                                    <p class="text-2xl font-black text-green-600">SPJ</p>
+                                    <p class="text-[10px] font-black text-brand-dark/50 uppercase tracking-wider">Terkunci</p>
+                                </div>
+                                <div class="w-px bg-gray-200"></div>
+                                <div>
+                                    <p class="text-2xl font-black text-brand-blue">SINKRON</p>
+                                    <p class="text-[10px] font-black text-brand-dark/50 uppercase tracking-wider">+ KENDALI</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Floating badge kecil -->
+                        <div class="absolute -top-4 -right-4 glass-card bg-white/90 rounded-xl p-3 shadow-xl flex items-center gap-2 border border-white/80 z-20">
+                            <div class="w-8 h-8 rounded-lg bg-green-500/10 text-green-600 flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <p class="text-xs font-black text-brand-dark">Zero Bypass</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION: TABEL PROGRES SPJ -->
+    <section class="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 relative z-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="glass-card rounded-[2.5rem] p-6 sm:p-10 border border-white/60">
+
+                <!-- Header -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                    <div>
+                        <span class="border border-green-500/30 bg-green-500/10 text-green-700 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">Live dari Google Sheets</span>
+                        <h2 class="text-2xl md:text-3xl font-black text-brand-dark drop-shadow-sm">Progres Laporan SPJ Kegiatan Program</h2>
+                        <p class="text-sm text-brand-dark/60 font-bold mt-1">Data diperbarui otomatis dari Google Sheets Puskesmas Simbang.</p>
+                    </div>
+                    <button onclick="loadSPJData()" id="btn-refresh" class="flex-shrink-0 flex items-center gap-2 bg-green-500/10 hover:bg-green-500/20 border border-green-500/30 text-green-700 font-black text-sm px-5 py-2.5 rounded-xl transition">
+                        <i class="fa-solid fa-rotate" id="icon-refresh"></i> Refresh
+                    </button>
+                </div>
+
+                <!-- Summary Cards -->
+                <div id="summary-cards" class="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-6 hidden">
+                    <div class="glass-card rounded-2xl p-4 text-center border border-white/60">
+                        <p id="sum-persen" class="text-3xl font-black text-brand-dark">-</p>
+                        <p class="text-[10px] font-black uppercase text-brand-dark/50 tracking-wider mt-1">Persentase Valid</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-4 text-center border border-white/60">
+                        <p id="sum-valid" class="text-3xl font-black text-green-600">-</p>
+                        <p class="text-[10px] font-black uppercase text-brand-dark/50 tracking-wider mt-1">Total Valid</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-4 text-center border border-white/60">
+                        <p id="sum-proses" class="text-3xl font-black text-brand-blue">-</p>
+                        <p class="text-[10px] font-black uppercase text-brand-dark/50 tracking-wider mt-1">Proses Verif</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-4 text-center border border-white/60">
+                        <p id="sum-perbaikan" class="text-3xl font-black text-amber-500">-</p>
+                        <p class="text-[10px] font-black uppercase text-brand-dark/50 tracking-wider mt-1">Perbaikan</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-4 text-center border border-white/60">
+                        <p id="sum-belum" class="text-3xl font-black text-red-500">-</p>
+                        <p class="text-[10px] font-black uppercase text-brand-dark/50 tracking-wider mt-1">Belum</p>
+                    </div>
+                </div>
+
+                <!-- Legend -->
+                <div id="legend" class="hidden flex flex-wrap gap-4 mb-5 items-center">
+                    <span class="flex items-center gap-1.5 text-xs font-bold text-brand-dark/70"><div class="w-3.5 h-3.5 rounded-full bg-green-500 shadow-sm"></div> VALID</span>
+                    <span class="flex items-center gap-1.5 text-xs font-bold text-brand-dark/70"><div class="w-3.5 h-3.5 rounded-full bg-amber-500 shadow-sm"></div> PERBAIKAN</span>
+                    <span class="flex items-center gap-1.5 text-xs font-bold text-brand-dark/70"><div class="w-3.5 h-3.5 rounded-full bg-blue-500 shadow-sm"></div> PROSES VERIFIKASI</span>
+                    <span class="flex items-center gap-1.5 text-xs font-bold text-brand-dark/70"><div class="w-3.5 h-3.5 rounded-full bg-red-500 shadow-sm"></div> BELUM</span>
+                    <span class="flex items-center gap-1.5 text-xs font-bold text-brand-dark/70"><div class="w-3.5 h-3.5 rounded-full bg-slate-400 shadow-sm"></div> TIDAK ADA KEGIATAN</span>
+                    <span class="flex items-center gap-1.5 text-xs font-bold text-brand-dark/70"><span style="color:rgba(10,22,46,0.3);font-size:12px;font-weight:900">—</span> Kosong</span>
+                </div>
+
+                <!-- Loading -->
+                <div id="tabel-loading" class="flex flex-col items-center justify-center py-16 gap-4">
+                    <div class="w-14 h-14 rounded-2xl bg-green-500/10 border border-green-500/20 text-green-600 flex items-center justify-center text-2xl" style="animation:spin 1s linear infinite">
+                        <i class="fa-solid fa-rotate"></i>
+                    </div>
+                    <p class="text-sm font-black text-brand-dark/50 uppercase tracking-widest">Memuat data...</p>
+                </div>
+
+                <!-- Error -->
+                <div id="tabel-error" class="hidden flex-col items-center justify-center py-16 gap-3">
+                    <div class="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-500 flex items-center justify-center text-2xl">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <p class="text-sm font-black text-brand-dark/60">Gagal memuat data.</p>
+                    <p id="error-message" class="text-xs text-brand-dark/50 text-center max-w-md">Periksa koneksi atau coba refresh.</p>
+                    <button onclick="loadSPJData()" class="text-xs font-black text-green-600 underline hover:text-green-700 mt-2">Coba Lagi</button>
+                </div>
+
+                <!-- Tabel -->
+                <div id="tabel-wrapper" class="hidden overflow-x-auto rounded-2xl border border-white/50">
+                    <table id="spj-table" class="w-full text-sm border-collapse">
+                        <thead id="tabel-head"></thead>
+                        <tbody id="tabel-body"></tbody>
+                    </table>
+                </div>
+
+                <p id="last-updated" class="text-[11px] font-bold text-brand-dark/40 text-right mt-4 hidden"></p>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Table layout */
+        #spj-table { border-collapse: separate; border-spacing: 0; }
+
+        #spj-table thead tr { background: rgba(34,197,94,0.09); }
+        #spj-table thead th {
+            padding: 11px 13px; font-size: 10px; font-weight: 900;
+            text-transform: uppercase; letter-spacing: 0.07em;
+            color: rgba(10,22,46,0.5); white-space: nowrap; text-align: center;
+            border-bottom: 2px solid rgba(255,255,255,0.6);
+            border-right: 1px solid rgba(255,255,255,0.4);
+        }
+        #spj-table thead th.th-nama {
+            text-align: left; min-width: 260px;
+            position: sticky; left: 0; z-index: 3;
+            background: rgba(220,252,231,0.97);
+        }
+        #spj-table thead th.th-no { width: 36px; min-width: 36px; }
+
+        /* Program header rows */
+        #spj-table tr.row-program td {
+            padding: 9px 13px; font-size: 10.5px; font-weight: 900;
+            text-transform: uppercase; letter-spacing: 0.06em; color: #1D63ED;
+            background: rgba(219,234,254,0.6);
+            border-top: 2px solid rgba(29,99,237,0.15);
+            border-bottom: 1px solid rgba(29,99,237,0.1);
+        }
+        #spj-table tr.row-program td.td-sticky {
+            position: sticky; left: 0; z-index: 1;
+            background: rgba(219,234,254,0.97);
+        }
+
+        /* Kegiatan rows */
+        #spj-table tr.row-kegiatan { border-bottom: 1px solid rgba(255,255,255,0.45); transition: background 0.12s; }
+        #spj-table tr.row-kegiatan:hover { background: rgba(255,255,255,0.45); }
+        #spj-table tr.row-kegiatan td {
+            padding: 10px 13px; font-weight: 600; font-size: 12px;
+            color: #0A162E; vertical-align: middle; text-align: center;
+            border-right: 1px solid rgba(255,255,255,0.3);
+        }
+        #spj-table tr.row-kegiatan td.td-no {
+            text-align: center; font-size: 11px; color: rgba(10,22,46,0.3); font-weight: 700;
+        }
+        #spj-table tr.row-kegiatan td.td-nama {
+            text-align: left; font-weight: 700; line-height: 1.45;
+            position: sticky; left: 0; z-index: 1;
+            background: rgba(255,255,255,0.9);
+        }
+        #spj-table tr.row-kegiatan:hover td.td-nama { background: rgba(240,253,244,0.97); }
+    </style>
+
+    <script>
+    const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQNg4TMpfSv4Cck2wtKHEvCby1t3zd_-9XkHynGBHpUoTibU6vZxLNik8KhY8wVc3otdEGjRVwso0A8/pub?gid=0&single=true&output=csv';
+    const BULAN_SHORT = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ags','Sep','Okt','Nov','Des'];
+
+    function parseCSV(text) {
+        return text.trim().split(/\r?\n/).map(line => {
+            const cols = []; let cur = '', inQ = false;
+            for (let i = 0; i < line.length; i++) {
+                const c = line[i];
+                if (c === '"') { inQ = !inQ; }
+                else if (c === ',' && !inQ) { cols.push(cur.trim()); cur = ''; }
+                else { cur += c; }
+            }
+            cols.push(cur.trim());
+            return cols.map(c => c.replace(/^"|"$/g, '').trim());
+        });
+    }
+
+    function isProgram(s) {
+        return s && s.trim().toUpperCase().startsWith('PROGRAM');
+    }
+
+    function classify(val) {
+        if (!val || val.trim() === '' || val.trim() === '-') return 'kosong';
+        const v = val.trim().toUpperCase();
+        if (v.includes('VALID')) return 'valid';
+        if (v.includes('PERBAIKAN')) return 'perbaikan';
+        if (v.includes('PROSES')) return 'proses';
+        if (v.includes('TIDAK ADA')) return 'tidakada';
+        if (v.includes('BELUM')) return 'belum';
+        return 'custom';
+    }
+
+    function renderCell(val) {
+        const t = classify(val);
+        if (t === 'kosong')   return `<span style="color:rgba(10,22,46,0.2);font-size:12px">—</span>`;
+        if (t === 'valid')    return `<div class="mx-auto w-3.5 h-3.5 rounded-full bg-green-500 shadow-sm" title="${val}"></div>`;
+        if (t === 'perbaikan')return `<div class="mx-auto w-3.5 h-3.5 rounded-full bg-amber-500 shadow-sm" title="${val}"></div>`;
+        if (t === 'proses')   return `<div class="mx-auto w-3.5 h-3.5 rounded-full bg-blue-500 shadow-sm" title="${val}"></div>`;
+        if (t === 'tidakada') return `<div class="mx-auto w-3.5 h-3.5 rounded-full bg-slate-400 shadow-sm" title="${val}"></div>`;
+        if (t === 'belum')    return `<div class="mx-auto w-3.5 h-3.5 rounded-full bg-red-500 shadow-sm" title="${val}"></div>`;
+        return `<div class="mx-auto w-3.5 h-3.5 rounded-full bg-indigo-400 shadow-sm" title="${val}"></div>`;
+    }
+
+    async function loadSPJData() {
+        const elLoad   = document.getElementById('tabel-loading');
+        const elErr    = document.getElementById('tabel-error');
+        const elErrMsg = document.getElementById('error-message');
+        const elWrap   = document.getElementById('tabel-wrapper');
+        const elIcon   = document.getElementById('icon-refresh');
+        const elSum    = document.getElementById('summary-cards');
+        const elLeg    = document.getElementById('legend');
+
+        elLoad.classList.remove('hidden'); 
+        elErr.classList.add('hidden');
+        elWrap.classList.add('hidden');    
+        elSum.classList.add('hidden');
+        elLeg.classList.add('hidden');
+        elIcon.style.animation = 'spin 1s linear infinite';
+
+        try {
+            const resp = await fetch(CSV_URL + '&cb=' + Date.now());
+            if (!resp.ok) throw new Error("Gagal mengambil data dari Google Sheets. (HTTP " + resp.status + ")");
+            
+            const text = await resp.text();
+
+            if (text.trim().toLowerCase().startsWith('<!doctype html>') || text.trim().toLowerCase().startsWith('<html')) {
+                throw new Error("File tidak berformat CSV. Pastikan Google Sheet sudah disetting 'Publish to Web' untuk publik.");
+            }
+
+            const raw = parseCSV(text);
+            
+            if (raw.length < 2) throw new Error("Data tabel kosong atau format tidak dikenali.");
+
+            let headerIdx = 1;
+            for(let i = 0; i < Math.min(5, raw.length); i++) {
+                if(raw[i].some(col => col.toUpperCase().includes('JAN') || col.toUpperCase().includes('FEB'))) {
+                    headerIdx = i;
+                    break;
+                }
+            }
+
+            const bulanRow   = raw[headerIdx].slice(1).filter(b => b.trim()); 
+            const numBulan   = bulanRow.length;
+            const dataRows   = raw.slice(headerIdx + 1).filter(r => r[0] && r[0].trim());
+
+            if (numBulan === 0) throw new Error("Kolom bulan tidak ditemukan pada data CSV.");
+
+            // ── THEAD ──────────────────────────────────────────────
+            document.getElementById('tabel-head').innerHTML = `<tr>
+                <th class="th-no">#</th>
+                <th class="th-nama">Program / Kegiatan</th>
+                ${bulanRow.map((b,i) => `<th style="min-width:72px">${BULAN_SHORT[i] || b}</th>`).join('')}
+            </tr>`;
+
+            // ── TBODY ──────────────────────────────────────────────
+            let html = '', no = 0, cValid = 0, cProses = 0, cPerbaikan = 0, cBelum = 0;
+
+            dataRows.forEach(row => {
+                const nama = row[0];
+                
+                // Memastikan panjang kolom data yang diambil sama persis dengan jumlah bulan.
+                const vals = [];
+                for (let i = 0; i < numBulan; i++) {
+                    vals.push(row[i + 1] || '');
+                }
+
+                if (isProgram(nama)) {
+                    html += `<tr class="row-program">
+                        <td class="td-no td-sticky" colspan="2" style="position:sticky;left:0;z-index:1">
+                            <i class="fa-solid fa-layer-group" style="font-size:9px;margin-right:6px"></i>${nama}
+                        </td>
+                        ${'<td></td>'.repeat(numBulan)}
+                    </tr>`;
+                    return; // Lewati sisa iterasi ke baris berikutnya
+                }
+
+                no++;
+                const types = vals.map(v => classify(v));
+                
+                // Menghitung jumlah per SEL LAPORAN/BULAN
+                types.forEach(t => {
+                    if (t === 'valid') cValid++;
+                    else if (t === 'proses') cProses++;
+                    else if (t === 'perbaikan') cPerbaikan++;
+                    else if (t === 'belum') cBelum++;
+                });
+
+                html += `<tr class="row-kegiatan">
+                    <td class="td-no">${no}</td>
+                    <td class="td-nama">${nama}</td>
+                    ${vals.map(v => `<td>${renderCell(v)}</td>`).join('')}
+                </tr>`;
+            });
+
+            document.getElementById('tabel-body').innerHTML = html;
+
+            // Kalkulasi Persentase (Mengabaikan "Tidak Ada Kegiatan" & "Kosong")
+            let totalAktif = cValid + cProses + cPerbaikan + cBelum;
+            let persentaseValid = totalAktif > 0 ? Math.round((cValid / totalAktif) * 100) : 0;
+
+            // Summary
+            document.getElementById('sum-persen').textContent    = persentaseValid + '%';
+            document.getElementById('sum-valid').textContent     = cValid;
+            document.getElementById('sum-proses').textContent    = cProses;
+            document.getElementById('sum-perbaikan').textContent = cPerbaikan;
+            document.getElementById('sum-belum').textContent     = cBelum;
+            
+            elSum.classList.remove('hidden');
+            elLeg.classList.remove('hidden');
+
+            elLoad.classList.add('hidden');
+            elWrap.classList.remove('hidden');
+
+            const now = new Date();
+            const elUpdated = document.getElementById('last-updated');
+            elUpdated.textContent = `Terakhir diperbarui: ${now.toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})} pukul ${now.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})}`;
+            elUpdated.classList.remove('hidden');
+
+        } catch(e) {
+            console.error("Kesalahan saat memuat data:", e);
+            elLoad.classList.add('hidden');
+            elErr.classList.remove('hidden');
+            elErr.classList.add('flex');
+            elErrMsg.textContent = e.message || "Terjadi kesalahan yang tidak diketahui.";
+        } finally {
+            elIcon.style.animation = '';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadSPJData);
+    </script>
+
+    <!-- SECTION: CARA KERJA -->
+    <section class="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 relative z-20">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12 fade-up">
+                <span class="border border-green-500/30 bg-green-500/10 backdrop-blur-sm text-green-700 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider mb-4 inline-block">Alur Kerja</span>
+                <h2 class="text-3xl md:text-4xl font-black text-brand-dark tracking-tight drop-shadow-sm">Bagaimana VALID Bekerja?</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+                <!-- Step 1 -->
+                <div class="glass-card rounded-3xl p-8 text-center hover:-translate-y-2 transition-all duration-300 fade-up delay-1">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-brand-blue/10 border border-brand-blue/20 text-brand-blue flex items-center justify-center text-2xl mb-5 shadow-inner">
+                        <i class="fa-regular fa-calendar-check"></i>
+                    </div>
+                    <div class="inline-flex items-center gap-2 mb-3">
+                        <span class="text-xs font-black text-brand-blue bg-brand-blue/10 rounded-full px-2 py-0.5">Langkah 1</span>
+                    </div>
+                    <h3 class="text-lg font-black text-brand-dark mb-2">Laporan SINKRON</h3>
+                    <p class="text-sm text-brand-dark/70 font-bold leading-relaxed">Petugas menyelesaikan dan mengunci laporan jadwal kegiatan di modul SINKRON sebagai syarat pertama.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="glass-card rounded-3xl p-8 text-center hover:-translate-y-2 transition-all duration-300 fade-up delay-2">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-brand-orange/10 border border-brand-orange/20 text-brand-orange flex items-center justify-center text-2xl mb-5 shadow-inner">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <div class="inline-flex items-center gap-2 mb-3">
+                        <span class="text-xs font-black text-brand-orange bg-brand-orange/10 rounded-full px-2 py-0.5">Langkah 2</span>
+                    </div>
+                    <h3 class="text-lg font-black text-brand-dark mb-2">Laporan KENDALI</h3>
+                    <p class="text-sm text-brand-dark/70 font-bold leading-relaxed">Petugas mengisi dan memverifikasi laporan hasil kegiatan lapangan di modul KENDALI secara real-time.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="glass-card rounded-3xl p-8 text-center hover:-translate-y-2 transition-all duration-300 fade-up delay-3 ring-2 ring-green-400/40">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-green-500/10 border border-green-500/20 text-green-600 flex items-center justify-center text-2xl mb-5 shadow-inner">
+                        <i class="fa-solid fa-file-export"></i>
+                    </div>
+                    <div class="inline-flex items-center gap-2 mb-3">
+                        <span class="text-xs font-black text-green-600 bg-green-500/10 rounded-full px-2 py-0.5">Langkah 3</span>
+                    </div>
+                    <h3 class="text-lg font-black text-brand-dark mb-2">SPJ Dapat Dicairkan</h3>
+                    <p class="text-sm text-brand-dark/70 font-bold leading-relaxed">Setelah kedua laporan terverifikasi, sistem VALID membuka kunci pencairan dana SPJ secara otomatis.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION: MANFAAT -->
+    <section class="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 relative z-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="glass-card rounded-[2.5rem] p-8 sm:p-12 border border-white/60">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                    
+                    <div>
+                        <span class="border border-green-500/30 bg-green-500/10 text-green-700 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider mb-4 inline-block">Keunggulan Sistem</span>
+                        <h2 class="text-3xl md:text-4xl font-black text-brand-dark mb-6 drop-shadow-sm">Mengapa VALID Penting?</h2>
+                        <p class="text-brand-dark/80 font-bold leading-relaxed mb-8">Sistem VALID menghilangkan celah antara pelaksanaan kegiatan dan pertanggungjawaban keuangan, memastikan setiap rupiah dana kegiatan memiliki jejak digital yang terverifikasi.</p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-green-500/10 border border-green-500/20 text-green-600 flex items-center justify-center flex-shrink-0 shadow-inner mt-0.5">
+                                    <i class="fa-solid fa-check text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="font-black text-brand-dark">Mencegah Pencairan Fiktif</p>
+                                    <p class="text-sm text-brand-dark/60 font-bold">SPJ hanya cair jika laporan kegiatan benar-benar ada dan terverifikasi digital.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-brand-blue/10 border border-brand-blue/20 text-brand-blue flex items-center justify-center flex-shrink-0 shadow-inner mt-0.5">
+                                    <i class="fa-solid fa-check text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="font-black text-brand-dark">Jejak Audit Lengkap</p>
+                                    <p class="text-sm text-brand-dark/60 font-bold">Setiap transaksi memiliki rekam jejak digital yang dapat diperiksa kapan saja.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-brand-orange/10 border border-brand-orange/20 text-brand-orange flex items-center justify-center flex-shrink-0 shadow-inner mt-0.5">
+                                    <i class="fa-solid fa-check text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="font-black text-brand-dark">Efisiensi Administrasi</p>
+                                    <p class="text-sm text-brand-dark/60 font-bold">Proses verifikasi otomatis mengurangi beban administrasi manual secara signifikan.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visual Metrik -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="glass-card rounded-2xl p-6 text-center hover:-translate-y-1 transition-transform col-span-2">
+                            <p class="text-5xl font-black text-green-600 mb-1">0</p>
+                            <p class="text-xs font-black uppercase text-brand-dark/60 tracking-wider">Pencairan Tanpa Laporan</p>
+                        </div>
+                        <div class="glass-card rounded-2xl p-6 text-center hover:-translate-y-1 transition-transform">
+                            <p class="text-4xl font-black text-brand-blue mb-1">2x</p>
+                            <p class="text-xs font-black uppercase text-brand-dark/60 tracking-wider">Verifikasi Ganda</p>
+                        </div>
+                        <div class="glass-card rounded-2xl p-6 text-center hover:-translate-y-1 transition-transform">
+                            <p class="text-4xl font-black text-brand-orange mb-1">100%</p>
+                            <p class="text-xs font-black uppercase text-brand-dark/60 tracking-wider">Akuntabilitas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="glass-section !border-b-0 pt-8 pb-8 text-center relative z-20">
+        <p class="text-xs font-bold text-brand-dark/70 drop-shadow-sm">
+            &copy; 2026 Puskesmas Simbang. Inovasi SATU (SMART Agenda Terpadu) — Modul VALID.
+        </p>
+    </footer>
+
+</body>
+</html>
